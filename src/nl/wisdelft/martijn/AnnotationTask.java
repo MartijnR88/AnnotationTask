@@ -2,39 +2,26 @@ package nl.wisdelft.martijn;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 public class AnnotationTask {
-	private static Document document;
-	private static XPath xPath = XPathFactory.newInstance().newXPath();
-
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
 		try {
 			ArrayList<String> files = new ArrayList<String>();
-			files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/response1.json");
-			files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/response2.json");
-			files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/response3.json");
+			files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/Response experiment/response1.json");
+			files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/Response experiment/response2.json");
+			files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/Response experiment/response3.json");
+			files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/Response experiment/annotations_oosterman.json");
+			files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/Response experiment/annotations_martijn.json");
+			//files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/Response experiment/annotations_63_corrected.json");
 
 			List<List<String>> result = new ArrayList<List<String>>();
 			// Add headers
@@ -44,8 +31,8 @@ public class AnnotationTask {
 			headers.add("timeSpent");
 			headers.add("Types");
 			headers.add("Other types");
-			headers.add("Categories");
-			headers.add("Other categories");
+//			headers.add("Categories");
+//			headers.add("Other categories");
 			result.add(headers);
 
 			for (String file : files) {
@@ -76,19 +63,20 @@ public class AnnotationTask {
 							new JSONObject(myJSONArray.get(i).toString()).get(
 									"response").toString()).get(0).toString())
 							.toString()).get("otherType").toString());
-					row.add(new JSONObject(new JSONObject(new JSONArray(
-							new JSONObject(myJSONArray.get(i).toString()).get(
-									"response").toString()).get(0).toString())
-							.toString()).get("category").toString());
-					row.add(new JSONObject(new JSONObject(new JSONArray(
-							new JSONObject(myJSONArray.get(i).toString()).get(
-									"response").toString()).get(0).toString())
-							.toString()).get("otherCategory").toString());
+//					row.add(new JSONObject(new JSONObject(new JSONArray(
+//							new JSONObject(myJSONArray.get(i).toString()).get(
+//									"response").toString()).get(0).toString())
+//							.toString()).get("category").toString());
+//					row.add(new JSONObject(new JSONObject(new JSONArray(
+//							new JSONObject(myJSONArray.get(i).toString()).get(
+//									"response").toString()).get(0).toString())
+//							.toString()).get("otherCategory").toString());
 					result.add(row);
 				}
-			}
+				br.close();
+			}			
 			// Write the result to CSV
-			writeToCSV(result, "annotations.csv");
+			writeToCSV(result, "annotations_total.csv");
 
 		} catch (JSONException e) {
 			e.printStackTrace();

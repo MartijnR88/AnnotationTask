@@ -20,7 +20,7 @@ public class StrategyTask {
 //		String filename = "domains";
 //		ArrayList<String> results = loadCSV(filename + ".csv");
 		
-		File file = new File("ground_truth2.csv");
+		File file = new File("ground_truth.csv");
 		FileWriter writer = new FileWriter(file, true);
 		writer.append("VideoId1, VideoId2, Ground_Truth_Score");
 		writer.append('\n');
@@ -51,9 +51,9 @@ public class StrategyTask {
 		ArrayList<String> result = new ArrayList<String>();
 
 		ArrayList<String> files = new ArrayList<String>();
-		//files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/Response strategies/ground_truth1.json");
-		//files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/Response strategies/ground_truth2.json");
-		files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/Response strategies/strategy3_response.json");
+		files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/Response strategies/ground_truth_news_docu.json");
+		files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/Response strategies/ground_truth_docu_news.json");
+		files.add("D:/Dropbox/Public/Master Thesis/Results/Annotation Task/Response strategies/ground_truth_event_docu.json");
 		
 		for (String file : files) {
 			FileReader fr = new FileReader(new File(file));
